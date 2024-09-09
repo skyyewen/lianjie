@@ -28,8 +28,11 @@ yarn-error.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 node_modules
-dist
 yarn.lock
 /.history
 /src/ext.json
 /src/ext.json
+gitlab-ci.yml
+Dockerfile
+deployment.yaml
+nginx.conf
