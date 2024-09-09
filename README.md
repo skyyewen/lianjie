@@ -9,3 +9,8 @@ https://mini.ant.design/guide/quick-start/
 
 node
 14.21.2
+
+
+启动项目
+yarn install
+npm run dev:h5  
