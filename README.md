@@ -9,3 +9,7 @@ https://mini.ant.design/guide/quick-start/
 
 node
 14.21.2
+
+
+启动项目
+npm run dev:h5  
