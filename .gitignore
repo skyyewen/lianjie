@@ -28,7 +28,6 @@ yarn-error.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 node_modules
-yarn.lock
 /.history
 /src/ext.json
 /src/ext.json
