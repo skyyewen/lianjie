@@ -6,3 +6,6 @@ https://1x.antdv.com/docs/vue/introduce-cn
 
 移动端使用的组件
 https://mini.ant.design/guide/quick-start/
+
+node
+14.21.2
