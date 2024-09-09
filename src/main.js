@@ -2,6 +2,10 @@ import App from './App'
 
 // #ifndef VUE3
 import Vue from 'vue'
+
+import antd from 'ant-design-vue';
+import 'ant-design-vue/dist/antd.css';
+Vue.use(antd);
 Vue.config.productionTip = false
 App.mpType = 'app'
 const app = new Vue({
