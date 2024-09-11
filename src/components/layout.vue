@@ -30,11 +30,10 @@
   font-size: 20px;
   font-weight: bold;
   box-shadow: 0 4px 8px rgba(0, 0, 0, .2);
-  position: sticky;
+  position: relative;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 10;
   background: rgba(255, 255, 255, 0.9);
 }
 
@@ -44,24 +43,28 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100%;
+  align-items: flex-start;
+  overflow: auto;
 }
 
 .main {
   width: 100%;
-  min-height: 100%;
   max-width: 1280px;
+  min-height: 100%;
   padding: 48px;
   background: #fff;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   align-content: center;
   gap: 16px;
 }
 
 @media (max-width: 768px) {
+  .header {
+    padding: 12px 24px;
+  }
+
   .main {
     padding: 24px;
   }
