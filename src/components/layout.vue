@@ -29,11 +29,13 @@
   color: #333;
   font-size: 20px;
   font-weight: bold;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, .2);
   position: sticky;
   top: 0;
   left: 0;
   right: 0;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.9);
 }
 
 .container {
