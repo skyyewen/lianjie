@@ -51,7 +51,7 @@ export default {
         city: undefined,
         person: "",
         department: "",
-        date: "",
+        date: undefined,
         content: ""
       }
     }

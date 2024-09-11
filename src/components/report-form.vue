@@ -19,6 +19,11 @@
               :placeholder="`请选择${formBase[value].title}`"
               :options="formBase[value].options"
           />
+          <DatePicker
+              v-else-if="formBase[value].component === 'date'"
+              v-model="formState[value]"
+              :placeholder="`请选择${formBase[value].title}`"
+          />
           <a-textarea style="width: 100%" v-else>
             <a-textarea
                 v-model="formState[value]"
@@ -41,10 +46,12 @@
 
 <script>
 import Select from "@/components/select.vue";
+import DatePicker from "@/components/date-picker.vue";
 
 export default {
   components: {
-    Select
+    Select,
+    DatePicker
   },
   props: {
     activeKey: {
@@ -115,7 +122,7 @@ export default {
           title: "发生时间",
           span: 12,
           required: true,
-          component: "input",
+          component: "date",
         },
         content: {
           title: "举报内容",
