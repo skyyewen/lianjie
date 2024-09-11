@@ -20,7 +20,19 @@
                 "enablePullDownRefresh": false
             }
             
-        }
+        },
+		{
+			"path": "pages/copy/reportCorruption",
+			"style": {
+				"navigationBarTitleText": "廉洁举报",
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTextStyle": "black"
+				// #ifdef H5
+			,
+			"navigationStyle": "custom"
+				// #endif
+			}
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

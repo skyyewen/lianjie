@@ -4,6 +4,7 @@
       <div>
         logo
       </div>
+      <div @click="gotoCopy">copy</div>
       <slot name="header"></slot>
     </div>
     <div class="container">
@@ -13,6 +14,18 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    gotoCopy() {
+      uni.navigateTo({
+        url: '/pages/copy/reportCorruption'
+      })
+    }
+  }
+}
+</script>
 
 <style scoped lang="less">
 .layout {
