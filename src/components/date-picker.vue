@@ -3,7 +3,7 @@ export default {
   props: {
     value: {
       type: null,
-      default: ""
+      default: undefined
     },
     placeholder: {
       type: String,
