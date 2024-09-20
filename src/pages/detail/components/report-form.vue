@@ -57,7 +57,7 @@
           支持扩展名：.jpg .png .jpeg .bmp .doc .ppt .xls .xlsx .docx .pptx .zip .rar .pdf
         </view>
 
-        <view>这里要列举上传的文件</view>
+        <view class="ant-upload-hint">这里要列举上传的文件</view>
       </view>
 
       <view class="btns">
@@ -290,6 +290,7 @@ uni.chooseFile({
     }
   }
   .ant-upload-hint{
+    margin-top: 10px;
   }
 }
 
