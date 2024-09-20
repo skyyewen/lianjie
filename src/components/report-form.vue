@@ -1,12 +1,16 @@
 <template>
   <a-form-model
       :model="formState"
+      :rules="rules"
+      ref="ruleForm"
   >
     <a-row :gutter="8">
-      <a-col v-for="(key,value) in formState" :xs="24" :xl="formBase[value].span">
+      <a-col v-for="(key,value) in formState" :key="value" :xs="24" :xl="formBase[value].span">
         <a-form-model-item
             :label="formBase[value].title"
             :extra="formBase[value].description"
+            class="inline-form-item"
+            :prop="value"
         >
           <a-input
               v-if="formBase[value].component === 'input'"
@@ -33,6 +37,19 @@
         </a-form-model-item>
       </a-col>
     </a-row>
+
+    <!-- 实现文件上传 -->
+      <a-upload
+        :action="uploadAction"
+        :multiple="true"
+        :fileList="fileList"
+        @change="handleFileChange"
+      >
+        <a-button>
+          <a-icon type="upload" /> 点击上传
+        </a-button>
+      </a-upload>
+
     <a-form-item>
       <a-button style="margin-right: 12px" type="primary" @click="handleSubmit">
         {{ activeKey === 'anonymous' ? '匿名' : '实名' }}举报
@@ -65,6 +82,7 @@ export default {
   },
   data() {
     return {
+      fileList: [],
       formBase: {
         username: {
           title: "您的名字",
@@ -133,16 +151,70 @@ export default {
         },
       },
       formState: this.state,
+
+      uploadAction: 'https://api.imyuanli.cn/api/tools/upload_avatar/', // 设置上传文件的接口地址
+      rules: {
+        username: [{ required: true, message: '请输入您的名字', trigger: 'blur' }],
+        email: [
+          { required: true, message: '请输入您的邮箱', trigger: 'blur' },
+          { type: 'email', message: '请输入正确的邮箱格式', trigger: 'blur' }
+        ],
+        phone: [
+          { required: true, message: '请输入您的手机号', trigger: 'blur' },
+          { pattern: /^1[3-9]\d{9}$/, message: '请输入正确的手机号格式', trigger: 'blur' }
+        ],
+        type: [{ required: true, message: '请选择举报类型', trigger: 'change' }],
+        city: [{ required: true, message: '请选择举报城市', trigger: 'change' }],
+        person: [{ required: true, message: '请输入被举报人姓名及岗位', trigger: 'blur' }],
+        department: [{ required: true, message: '请输入被举报人所在部门', trigger: 'blur' }],
+        date: [{ required: true, message: '请选择发生时间', trigger: 'change' }],
+        content: [{ required: true, message: '请输入举报内容', trigger: 'blur' }],
+      }
     }
   },
   methods: {
     handleSubmit() {
-      console.log('submit!', this.formState);
+      this.$refs.ruleForm.validate(valid => {
+        if (valid) {
+          console.log('提交成功!', this.formState);
+        } else {
+          console.log('验证失败');
+          return false;
+        }
+      });
+    },
+    handleFileChange(info) {
+      debugger
+      let fileList = [...info.fileList];
+      fileList = fileList.map(file => {
+        if (file.response) {
+          file.url = file.response.url;
+        }
+        return file;
+      });
+      this.fileList = fileList;
+      debugger
     }
   }
 }
 </script>
 
 <style scoped lang="less">
-
+// pc
+@media screen and (min-width: 768px) {
+  .inline-form-item {
+      display: flex;
+      align-items: flex-start;
+    /deep/ .ant-form-item-label {
+      width: 110px;
+      margin-right: 10px;
+    }
+    /deep/ .ant-form-item-control-wrapper {
+      flex: 1;
+    }
+  }
+  .bottom_textarea{
+      transform: translateY(4px);
+  }
+}
 </style>
