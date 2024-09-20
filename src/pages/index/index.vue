@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import Layout from '@/components/layout.vue'
-import ReportForm from "@/components/report-form.vue";
+import Layout from '@/pages/index/components/layout.vue'
+import ReportForm from "@/pages/index/components/report-form.vue";
 
 export default {
   components: {

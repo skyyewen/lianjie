@@ -62,8 +62,8 @@
 </template>
 
 <script>
-import Select from "@/components/select.vue";
-import DatePicker from "@/components/date-picker.vue";
+import Select from "@/pages/index/components/select.vue";
+import DatePicker from "@/pages/index/components/date-picker.vue";
 
 export default {
   components: {

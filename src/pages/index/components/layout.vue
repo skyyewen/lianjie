@@ -5,6 +5,7 @@
         logo
       </div>
       <div @click="gotoCopy">copy</div>
+      <div @click="gotoNew">最新</div>
       <slot name="header"></slot>
     </div>
     <div class="container">
@@ -21,6 +22,11 @@ export default {
     gotoCopy() {
       uni.navigateTo({
         url: '/pages/copy/reportCorruption'
+      })
+    },
+    gotoNew() {
+      uni.navigateTo({
+        url: '/pages/detail/detail'
       })
     }
   }

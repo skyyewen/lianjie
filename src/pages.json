@@ -14,11 +14,15 @@
 		}
 	    ,{
             "path" : "pages/detail/detail",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
+			"style": {
+				"navigationBarTitleText": "廉洁举报",
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTextStyle": "black"
+				// #ifdef H5
+			,
+			"navigationStyle": "custom"
+				// #endif
+			}
             
         },
 		{
