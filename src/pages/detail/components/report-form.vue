@@ -263,6 +263,7 @@ uni.chooseFile({
       line-height: 44rpx;
     }
     .upload-container{
+      cursor: pointer;
       position: relative;
       display: flex;
       align-items: center;
