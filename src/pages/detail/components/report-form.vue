@@ -6,7 +6,7 @@
       :rules="rules"
     >
       <a-row :gutter="8">
-        <a-col v-for="(key,value) in formState" :key="key"  :md="formBase[value].span">
+        <a-col v-for="(key,value) in formState" :key="value"  :md="formBase[value].span">
           <a-form-model-item
               :label="formBase[value].title"
               :extra="activeKey==0 ? formBase[value].description : ''"
@@ -45,19 +45,7 @@
       </a-row>
 
       <view class="upload">
-        <view class="upload_file">
-          <view class="upload_file_title">上传附件</view>
-          <view @click="uploadFile" class="upload-container">
-            <image class="upload_img" src="" mode="" />
-            <view class="plus-icon">+</view>
-          </view>
-        </view>
-
-        <view class="ant-upload-hint">
-          支持扩展名：.jpg .png .jpeg .bmp .doc .ppt .xls .xlsx .docx .pptx .zip .rar .pdf
-        </view>
-
-        <view class="ant-upload-hint">这里要列举上传的文件</view>
+        <ChooseFile/>
       </view>
 
       <view class="btns">
@@ -71,6 +59,7 @@
 
 <script>
 import Select from "./select.vue";
+import ChooseFile from "./chooseFile.vue";
 import DatePicker from "./date-picker.vue";
 import Cascader from "./cascader.vue";
 import zh_CN from 'ant-design-vue/lib/locale-provider/zh_CN';
@@ -82,7 +71,8 @@ export default {
   components: {
     Select,
     DatePicker,
-    Cascader
+    Cascader,
+    ChooseFile
   },
   props: {
     activeKey: {
@@ -181,54 +171,9 @@ export default {
         date: [{ required: true, message: '请选择发生时间', trigger: 'change' }],
         content: [{ required: true, message: '请输入举报内容', trigger: 'blur' }]
       },
-      fileList: [],
-      allowedFileTypes: [
-        'jpg', 'png', 'jpeg', 'bmp', 
-        'doc', 'ppt', 'xls', 'xlsx', 'docx', 'pptx', 
-        'zip', 'rar', 'pdf'
-      ],
     }
   },
   methods: {
-    uploadFile(info) {
-        // uni.chooseFile({
-        //   count: 6, //默认100
-        //   extension:['.zip','.doc','.docx'],
-        //   success: function (res) {
-        //     console.log(JSON.stringify(res.tempFilePaths));
-        //   }
-        // });
-
-uni.chooseFile({
-	count: 1,
-	success: (res) => {
-		console.log(res)
-    debugger
-		uni.uploadFile({
-			url: `/api/`,
-			filePath: res.tempFilePaths[0],
-			name: 'file',
-			formData: {
-				'token': uni.getStorageSync('token') || '',
-			},
-			success: res => {
-				res = JSON.parse(res.data);
-				if (res.code === 1) {
-					console.log('上传成功啦！~')
-				} else {
-					uni.showToast({
-						icon: 'none',
-						mask: true,
-						title: '上传失败',
-					});
-				}
-			}
-		});
-	}
-})
-
-        
-    },
     handleSubmit() {
       this.$refs.ruleForm.validate(valid => {
         if (valid) {
@@ -250,49 +195,7 @@ uni.chooseFile({
   align-items: center;
   justify-content: center;
 }
-.upload{
-  .upload_file{
-    display: flex;
-    flex-direction: column;
-    align-items: baseline;
-    .upload_file_title{
-      color: rgba(0, 0, 0, 0.65);
-      text-align: left;
-      font-size: 28rpx;
-      font-family: PingFang SC, PingFang SC-Regular;
-      font-weight: Regular;
-      text-align: right;
-      line-height: 44rpx;
-    }
-    .upload-container{
-      cursor: pointer;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      .plus-icon{
-        position: absolute;
-        font-size: 40px;
-        width: 60px;
-        height: 60px;
-        line-height: 60px;
-        text-align: center;
-        color: rgba(0,0,0,0.15);
-      }
-    }
-    .upload_img{
-      margin-top: 20rpx;
-      width: 208rpx;
-      height: 208rpx;
-      background: rgba(0,0,0,0.04);
-      border: 2rpx dashed rgba(0,0,0,0.15);
-      border-radius: 4rpx;
-    }
-  }
-  .ant-upload-hint{
-    margin-top: 10px;
-  }
-}
+
 
 
 .btns{
@@ -363,30 +266,6 @@ uni.chooseFile({
   }
   .btns{
     margin-left: 120px;
-  }
-  .upload{
-    .upload_file{
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      .upload_file_title{
-        color: rgba(0, 0, 0, 0.65);
-        width: 110px;
-        margin-right: 10px;
-        text-align: right;
-      }
-      .upload_img{
-        margin-top: 0;
-        width: 208rpx;
-        height: 208rpx;
-        background: rgba(0,0,0,0.04);
-        border: 2rpx dashed rgba(0,0,0,0.15);
-        border-radius: 4rpx;
-      }
-    }
-    .ant-upload-hint{
-      margin-left: 120px;
-    }
   }
 }
 
