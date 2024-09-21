@@ -1,11 +1,11 @@
 模仿的网页
 https://msems.pupumall.com/honesty  
 
-pc使用的组件
+pc使用的组件 antd for vue
 https://1x.antdv.com/docs/vue/introduce-cn
 
 移动端使用的组件
-https://mini.ant.design/guide/quick-start/
+uniapp
 
 node
 14.21.2
