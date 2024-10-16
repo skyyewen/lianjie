@@ -276,7 +276,7 @@ page {
         color: red;
       }
       .underline {
-        z-index: 999;
+        z-index: 2;
         position: absolute;
         bottom: 0;
         left: 0;

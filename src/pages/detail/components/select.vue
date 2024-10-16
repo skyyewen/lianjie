@@ -38,7 +38,7 @@ export default {
         @change="handleChange"
         :placeholder="placeholder"
     >
-      <a-select-option v-for="option in options" :value="option.value">
+      <a-select-option v-for="option in options" :value="option.value" :key="option.value">
         {{ option.label }}
       </a-select-option>
     </a-select>

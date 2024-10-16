@@ -31,7 +31,6 @@
             <DatePicker
                 v-else-if="formBase[value].component === 'date'"
                 v-model="formState[value]"
-                :placeholder="`请选择${formBase[value].title}`"
             />
             <a-textarea
                 class="bottom_textarea"

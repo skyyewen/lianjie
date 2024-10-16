@@ -71,6 +71,7 @@
     "caniuse-lite": "^1.0.30001549",
     "core-js": "^3.6.5",
     "flyio": "0.6.14",
+    "node-sass": "^4.14.0",
     "regenerator-runtime": "^0.12.1",
     "umtrack-alipay": "^2.7.1",
     "umtrack-wx": "^2.5.2",
@@ -125,6 +126,6 @@
     }
   },
   "engines": {
-    "node": "16"
+    "node": "14"
   }
 }

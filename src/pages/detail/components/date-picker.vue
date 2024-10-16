@@ -1,6 +1,9 @@
 <script>
-import moment from 'moment';
+import uniDatetimePicker from '@/components/uni-datetime-picker/uni-datetime-picker.vue';
 export default {
+  components: {
+    uniDatetimePicker
+  },
   props: {
     value: {
       type: null,
@@ -21,22 +24,17 @@ export default {
     }
   },
   methods: {
-    moment,
-    handleChange(date, dateString) {
-      this.$emit('input', dateString); // 发出 input 事件以更新父组件的值
+    handleChange(date) {
+      console.log(date);
+      this.$emit('input', date); // 发出 input 事件以更新父组件的值
     }
   }
 }
 </script>
 
 <template>
-  <div>
-    <a-range-picker
-      :ranges="{ Today: [moment(), moment()], 'This Month': [moment(), moment().endOf('month')] }"
-      :value="value"
-      style="width: 100%"
-      @change="handleChange"
-    />
+  <div style="margin-top:3px;">
+      <uni-datetime-picker :value="value" type="daterange" @change="handleChange"/>
   </div>
 </template>
 
