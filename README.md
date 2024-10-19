@@ -1,3 +1,5 @@
+uniapp网页响应式项目，大屏和移动端
+
 模仿的网页
 https://msems.pupumall.com/honesty  
 
@@ -10,6 +12,6 @@ uniapp
 node
 14.21.2
 
-
-启动项目
+安装依赖，启动项目
+yarn
 npm run dev:h5  
