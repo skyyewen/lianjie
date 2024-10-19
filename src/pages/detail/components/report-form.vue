@@ -23,28 +23,37 @@
                 v-model="formState[value]"
                 :placeholder="`请选择${formBase[value].title}`"
                 :options="formBase[value].options"
+                @change="handleSelectChange(value)"
             />
             <Cascader 
               v-else-if="formBase[value].component === 'cascader'" 
               v-model="formState[value]"
+              @change="handleSelectChange(value)"
             />
             <DatePicker
                 v-else-if="formBase[value].component === 'date'"
                 v-model="formState[value]"
+                @change="handleSelectChange(value)"
             />
-            <a-textarea
-                class="bottom_textarea"
-                v-else
-                v-model="formState[value]"
-                :placeholder="formBase[value].placeholder"
-                style="width: 100%"
-            />
+            <div v-else class="textarea_box">
+              <a-textarea
+                  class="bottom_textarea"
+                  v-model="formState[value]"
+                  :placeholder="formBase[value].placeholder"
+                  style="width: 100%"
+                  :maxlength="500"
+                  :autoSize="{ minRows: 2, maxRows: 7 }"
+                  @input="numLimit"
+              />
+              <div class="textarea">{{number}}/500</div>
+            </div>
+
           </a-form-model-item>
         </a-col>
       </a-row>
 
       <view class="upload">
-        <ChooseFile/>
+        <ChooseFile ref="chooseFile"/>
       </view>
 
       <view class="btns">
@@ -85,6 +94,7 @@ export default {
   },
   data() {
     return {
+      number: 0,
       zh_CN,
       formBase: {
         username: {
@@ -111,7 +121,7 @@ export default {
           required: true,
           component: "select",
           options: [
-            {value: '1', label: '索取或收受不正当利益，"吃、拿、卡、要"等行为'},
+            {value: '1', label: '索取或收受不正当利益，“吃、拿、卡、要”等行为'},
             {value: '2', label: '弄虚作假行为'},
             {value: '3', label: '窃取、泄露、贩卖公司信息行为'},
             {value: '4', label: '投资与公司业务利益冲突或在外兼职的行为'},
@@ -170,18 +180,35 @@ export default {
         date: [{ required: true, message: '请选择发生时间', trigger: 'change' }],
         content: [{ required: true, message: '请输入举报内容', trigger: 'blur' }]
       },
+      allowedFileTypes: [
+        'jpg', 'png', 'jpeg', 'bmp', 
+        'doc', 'ppt', 'xls', 'xlsx', 'docx', 'pptx', 
+        'zip', 'rar', 'pdf'
+      ],
     }
   },
   methods: {
+    numLimit(){
+      var num = this.formState.content.length
+      this.number = num
+  },
     handleSubmit() {
       this.$refs.ruleForm.validate(valid => {
-        if (valid) {
-          console.log('提交成功!', this.formState);
-        } else {
-          console.log('验证失败');
-          return false;
-        }
+          if (valid) {
+            // 验证成功，继续处理表单提交
+            this.processFormSubmission();
+          } else {
+            console.log('验证失败');
+            return;
+          }
       });
+
+    },
+    processFormSubmission() {
+      console.log(this.formState);
+    },
+    handleSelectChange(field) {
+      this.$refs.ruleForm.validateField(field);
     }
     
   }
@@ -191,26 +218,67 @@ export default {
 <style scoped lang="less">
 .flex-center{
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+}
+.textarea_box{
+  position: relative;
+  .textarea {
+    position: absolute;
+    font-size: 10px;
+    bottom: 20px;
+    right: 10px;
+    height: 22px;
+    font-size: 12px;
+    font-family: PingFang SC, PingFang SC-Regular;
+    font-weight: Regular; 
+    color: rgba(0,0,0,0.25);
+    line-height: 22px;
+  }
 }
 
+
+.upload{
+  .upload_file{
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    .upload_file_title{
+      color: rgba(0, 0, 0, 0.65);
+      text-align: left;
+      font-size: 28rpx;
+      font-family: PingFang SC, PingFang SC-Regular;
+      font-weight: Regular;
+      text-align: right;
+      line-height: 44rpx;
+    }
+    .upload_img{
+      margin-top: 20rpx;
+      width: 208rpx;
+      height: 208rpx;
+      background: rgba(0,0,0,0.04);
+      border: 2rpx dashed rgba(0,0,0,0.15);
+      border-radius: 4rpx;
+    }
+  }
+  .ant-upload-hint{
+  }
+}
 
 
 .btns{
   margin-top: 32px;
-  padding-bottom: 20px;
   display: flex;
   .btn_submit{
-    width: 130rpx;
-    height: 64rpx;
+    width: 65px;
+    height: 32px;
     background: #d7000f;
-    border-radius: 8rpx;
-    font-size: 28rpx;
+    border-radius: 4px;
+    font-size: 14px;
     font-family: PingFang SC, PingFang SC-Regular;
     font-weight: Regular;
     color: #ffffff;
-    line-height: 44rpx;
+    line-height: 22px;
     transition: all 0.3s ease;
     
     &:hover {
@@ -222,17 +290,17 @@ export default {
     }
   }
   .btn_cancel{
-    margin-left: 16rpx;
-    width: 130rpx;
-    height: 64rpx;
+    margin-left: 16px;
+    width: 65px;
+    height: 32px;
     background: #ffffff;
     border: 2rpx solid #d9d9d9;
-    border-radius: 8rpx;
-    font-size: 28rpx;
+    border-radius: 4px;
+    font-size: 14px;
     font-family: PingFang SC, PingFang SC-Regular;
     font-weight: Regular;
     color: rgba(0,0,0,0.65);
-    line-height: 44rpx;
+    line-height: 22px;
     transition: all 0.3s ease;
     
     &:hover {
@@ -249,6 +317,9 @@ export default {
 
 // pc
 @media screen and (min-width: 768px) {
+  .textarea {
+    bottom: 14px!important;
+  }
   .inline-form-item {
       display: flex;
       align-items: flex-start;
@@ -261,10 +332,36 @@ export default {
     }
   }
   .bottom_textarea{
-      transform: translateY(4px);
+    width: 100%;
+    resize:none;
+    transform: translateY(4px);
   }
   .btns{
     margin-left: 120px;
+  }
+  .upload{
+    .upload_file{
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      .upload_file_title{
+        color: rgba(0, 0, 0, 0.65);
+        width: 110px;
+        margin-right: 10px;
+        text-align: right;
+      }
+      .upload_img{
+        margin-top: 0;
+        width: 208rpx;
+        height: 208rpx;
+        background: rgba(0,0,0,0.04);
+        border: 2rpx dashed rgba(0,0,0,0.15);
+        border-radius: 4rpx;
+      }
+    }
+    .ant-upload-hint{
+      margin-left: 120px;
+    }
   }
 }
 

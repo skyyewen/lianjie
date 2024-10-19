@@ -1,10 +1,13 @@
 <template>
       <view class="upload">
         <view class="upload_file">
-          <view class="upload_file_title">上传附件</view>
+          <view class="upload_file_title">附件</view>
           <view @click="uploadFile" class="upload-container">
             <image class="upload_img" src="" mode="" />
-            <view class="plus-icon">+</view>
+            <view class="plus-icon">
+              <view class="plus-icon-plus">+</view>
+              <view class="plus-icon-text">上传照片</view>
+            </view>
           </view>
         </view>
 
@@ -63,8 +66,8 @@ export default {
         },
         deleteFile(index) {
             this.fileList.splice(index, 1)
-        }
-    }
+        },
+    },
 }
 </script>
 
@@ -77,11 +80,11 @@ export default {
     .upload_file_title{
       color: rgba(0, 0, 0, 0.65);
       text-align: left;
-      font-size: 28rpx;
+      font-size: 14px;
       font-family: PingFang SC, PingFang SC-Regular;
       font-weight: Regular;
       text-align: right;
-      line-height: 44rpx;
+      line-height: 22px;
     }
     .upload-container{
       cursor: pointer;
@@ -90,19 +93,35 @@ export default {
       align-items: center;
       justify-content: center;
       .plus-icon{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         position: absolute;
-        font-size: 40px;
-        width: 60px;
-        height: 60px;
-        line-height: 60px;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         text-align: center;
-        color: rgba(0,0,0,0.15);
+        .plus-icon-plus{
+          font-size: 30px;
+          color: rgba(0,0,0,0.45);
+        }
+        .plus-icon-text{
+          padding-bottom: 14px;
+          font-size: 14px;
+          font-family: PingFang SC, PingFang SC-Regular;
+          font-weight: Regular;
+          text-align: center;
+          color: rgba(0,0,0,0.65);
+          line-height: 22px;
+        }
       }
     }
     .upload_img{
       margin-top: 20rpx;
-      width: 208rpx;
-      height: 208rpx;
+      width: 104px;
+      height: 104px;
       background: rgba(0,0,0,0.04);
       border: 2rpx dashed rgba(0,0,0,0.15);
       border-radius: 4rpx;
@@ -118,13 +137,26 @@ export default {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10rpx;
+      padding: 6rpx 10rpx;
       margin-bottom: 10rpx;
       background-color: #f5f5f5;
-      border-radius: 4rpx;
+      border-radius: 6rpx;
       transition: all 0.3s ease;
-      
+      &:hover{
+        background-color: #e6e6e6;
+      }
+      .file-icon{
+        width: 14px;
+        height: 14px;
+      }
       .file-name {
+        margin-left: 5px;
+        font-size: 14px;
+        font-family: PingFang SC, PingFang SC-Regular;
+        font-weight: Regular;
+        text-align: left;
+        color: #d7000f;
+        line-height: 22px;
         flex: 1;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -157,14 +189,14 @@ export default {
         width: 110px;
         margin-right: 10px;
         text-align: right;
+        font-size: 14px;
+        font-family: PingFang SC, PingFang SC-Regular;
+        font-weight: Regular;
+        color: rgba(0, 0, 0, 0.65);
+        line-height: 22px;
       }
       .upload_img{
         margin-top: 0;
-        width: 208rpx;
-        height: 208rpx;
-        background: rgba(0,0,0,0.04);
-        border: 2rpx dashed rgba(0,0,0,0.15);
-        border-radius: 4rpx;
       }
     }
     .ant-upload-hint{

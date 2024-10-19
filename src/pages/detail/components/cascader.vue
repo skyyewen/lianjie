@@ -31,8 +31,10 @@ export default {
     handleChange(value) {
       if(value.detail.value.length==0) {
         this.$emit('input', '');
+        this.$emit('change', '');
       }else {
         this.$emit('input', value);
+        this.$emit('change', value);
       }
     }
   }
@@ -47,10 +49,24 @@ export default {
     placeholder="请选择省市"
     style="width: 100%"
   /> -->
-<div style="margin-top:3px;">
-  <uni-data-picker :localdata="options" :value="value" placeholder="请选择省市" popup-title="请选择" @change="handleChange" ></uni-data-picker>
+<div style="margin-top:3px;margin-bottom: 3px;">
+  <uni-data-picker :localdata="options" :value="value" placeholder="请选择省市" popup-title="请选择" @change="handleChange" class="ant-select-selection ant-select-selection--single">
+    
+  </uni-data-picker>
 </div>
 </template>
 
 <style scoped lang="less">
+/deep/.uni-data-tree-input{
+  border: 0;
+  height: 32px;
+}
+/deep/.input-value{
+  border: 0;
+  height: 32px;
+}
+/deep/.placeholder{
+  color: #bfbfbf;
+  font-size: 14px;
+}
 </style>

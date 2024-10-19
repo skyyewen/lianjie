@@ -21,7 +21,9 @@ export default {
   },
   methods: {
     handleChange(value) {
-      this.$emit('input', value); // 发出 input 事件以更新父组件的值
+      this.$emit('input', value);
+      // 触发一个自定义事件，用于通知父组件值已更改
+      this.$emit('change', value);
     }
   }
 }
@@ -29,9 +31,6 @@ export default {
 
 <template>
   <div>
-    <!--    <div v-if="isMobile()">-->
-    <!--      移动端-->
-    <!--    </div>-->
     <a-select
         style="width: 100%"
         :value="value"

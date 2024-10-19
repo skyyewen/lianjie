@@ -11,7 +11,7 @@
 						<view class="uni-date__x-input">{{ displayValue || singlePlaceholderText }}</view>
 					</view>
 
-					<view v-else class="uni-date-x uni-date-range" style="height: 32px;line-height: 32px;">
+					<view v-else class="uni-date-x uni-date-range" :style="{height: '32px', lineHeight: '32px', color: displayRangeValue.startDate ? 'rgba(0, 0, 0, 0.65)' : '#bfbfbf'}">
             <uni-icons class="icon-calendar" type="calendar" color="#c0c4cc" size="22"></uni-icons>
             <view class="uni-date__x-input text-center">{{ displayRangeValue.startDate || startPlaceholderText }}</view>
 

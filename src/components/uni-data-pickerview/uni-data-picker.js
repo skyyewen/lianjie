@@ -487,6 +487,15 @@ export default {
 
       this.dataList = dataList
       this.selectedIndex = dataList.length - 1
+      if(this.selected?.length==2){
+        if(this.selected[0]?.text==this.selected[1]?.text){
+          isleaf=true
+          return {
+            isleaf,
+            hasNodes
+          }
+        }
+      }
 
       if (!isleaf && this.selected.length < dataList.length) {
         this.selected.push({
